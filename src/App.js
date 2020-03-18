@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 function App() {
   const [techs, setTechs] = useState(['ReactJS', 'React Native', 'NodeJS']);
@@ -20,13 +20,18 @@ function App() {
     setTechs([...techs, newTech]);
   }
 
+  const techSize = useMemo(() => techs.length, [techs]);
+  // Valor só vai ser alterado quando o techs for alterado,
+  // Não sendo atualizado toda vez que o componente altera algo
+
   return (
     <>
       <ul>
-        {techs.map(t => (
-          <li key={t}>{t}</li>
+        {techs.map(tech => (
+          <li key={tech}>{tech}</li>
         ))}
       </ul>
+      <strong>Você aprendeu {techSize} tecnologias</strong>
       <input
         type="text"
         value={newTech}
